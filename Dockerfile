@@ -1,10 +1,10 @@
-FROM rust:1.65 as builder
+FROM rust:1.82 AS builder
 WORKDIR /usr/src/myapp
 COPY . .
 ARG github_token 
 RUN git config --global credential.helper store && echo "https://zefanjajobse:${github_token}@github.com" > ~/.git-credentials && cargo install --path .
 
-FROM debian:bullseye
+FROM debian:bookworm-slim
 
 ENV token default_token_value
 ENV game default_game_value
